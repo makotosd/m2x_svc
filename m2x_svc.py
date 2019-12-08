@@ -26,6 +26,28 @@ def post():
     return jsonify(response)
 
 
+@app.route('/m2x_temperature', methods=['GET'])
+def get_temperature():
+    client = M2XClient(key='81faa53c80c0c084e797d706bc84be25')  # API-KEY
+    device = client.device('7870230c081b7f4f678dde08bc7bcba7')  # DEVICE-ID
+    stream = device.stream('temperature')
+
+    response = stream.values()
+
+    return jsonify(response)
+
+
+@app.route('/m2x_humidity', methods=['GET'])
+def get_humdity():
+    client = M2XClient(key='81faa53c80c0c084e797d706bc84be25')  # API-KEY
+    device = client.device('7870230c081b7f4f678dde08bc7bcba7')  # DEVICE-ID
+    stream = device.stream('temperature')
+
+    response = stream.values()
+
+    return jsonify(response)
+
+
 if __name__ == '__main__':
     app.debug = True
     app.run(host='0.0.0.0', port=8080)
