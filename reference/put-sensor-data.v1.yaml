@@ -1,0 +1,92 @@
+openapi: 3.0.0
+info:
+  title: put sensor data
+  version: '1.0'
+  contact:
+    name: makotosd
+    url: 'https://github.com/makotosd'
+    email: zzz@mmm.com
+  description: API to send data to m2x.
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /m2x:
+    post:
+      summary: ''
+      operationId: post-m2x
+      responses:
+        '200':
+          description: OK
+      description: M2xにデータを送る。
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                timestamp:
+                  type: string
+                value:
+                  type: object
+                  properties:
+                    temperature:
+                      type: number
+                    humidity:
+                      type: number
+            examples:
+              example-1:
+                value:
+                  timestamp: '2019/12/04 14:44:31'
+                  value:
+                    humidity: 65.56496528572518
+                    temperature: 24.28290226596475
+        description: 'timestamp, humidity, temperature  '
+  /m2x_temperature:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  end:
+                    type: string
+                  limit:
+                    type: integer
+                  sort:
+                    type: string
+                  sor_dir:
+                    type: string
+                  values:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        timestamp:
+                          type: string
+                        value:
+                          type: number
+              examples:
+                example:
+                  value:
+                    end: '2019-12-11T14:43:22.231Z'
+                    limit: 1000
+                    sort: timestamp
+                    sort_dir: desc
+                    values:
+                      - timestamp: '2019-12-11T14:40:02.762Z'
+                        value: 21.69466697184711
+                      - value: 21.58388647287709
+                      - timestamp: '2019-12-11T14:20:03.052Z'
+                        value: 21.64431219958801
+      operationId: get-m2x_temperature
+      description: get temperature from m2x server.
+      requestBody: {}
+components:
+  schemas: {}
+  securitySchemes: {}
