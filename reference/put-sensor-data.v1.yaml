@@ -86,7 +86,11 @@ paths:
                         value: 21.64431219958801
       operationId: get-m2x_temperature
       description: get temperature from m2x server.
-      requestBody: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: 'null'
 components:
   schemas: {}
   securitySchemes: {}
