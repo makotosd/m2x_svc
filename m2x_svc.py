@@ -2,6 +2,7 @@
 from m2x.client import M2XClient
 from flask import Flask, jsonify, request
 import requests
+import json
 
 
 app = Flask(__name__)
@@ -18,31 +19,29 @@ def machinist_post():
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + api_key
     }
-
     data = {
-        "agent": "my agent_name}",
+        "agent": "Lime",
         "metrics": [
             {
                 "name": "temperature",
                 "namespace": "Environment Sensor",
-                "tags": {
-                    "tag_name": "tag_value"
-                },
                 "data_point": {
-                    "timestamp": 1470276000,
-                    "value": 27.6
+                    "value": temperature
+                }
+            },
+            {
+                "name": "humidity",
+                "namespace": "Environment Sensor",
+                "data_point": {
+                    "value": humidity
                 }
             }
         ]
     }
 
-    response = requests.post('https://gw.machinist.iij.jp/endpoint', headers=headers, data=data)
-    '''
-    response = {'temperature': response_temperature,
-                'humidity': response_humidity}
-    '''
+    response = requests.post('https://gw.machinist.iij.jp/endpoint', headers=headers, data=json.dumps(data))
 
-    return jsonify(response)
+    return jsonify(response.text)
 
 
 @app.route('/m2x', methods=['POST'])
