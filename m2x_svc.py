@@ -3,6 +3,7 @@ from m2x.client import M2XClient
 from flask import Flask, jsonify, request
 import requests
 import json
+import update_spreadsheet
 
 
 app = Flask(__name__)
@@ -40,6 +41,9 @@ def machinist_post():
     }
 
     response = requests.post('https://gw.machinist.iij.jp/endpoint', headers=headers, data=json.dumps(data))
+
+    ## save data into google spreadsheet.
+    update_spreadsheet.update_spreadsheet(temperature, humidity)
 
     return jsonify(response.text)
 
