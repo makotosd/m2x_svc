@@ -11,7 +11,7 @@ SPREADSHEET_KEY = '1gE3q5ig8XpAjr3JkzjfjKbmkwvBT_cL0XnhuxQNAXjI'
 #
 def update_spreadsheet(temperature, humidity):
     scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
-    credentials = ServiceAccountCredentials.from_json_keyfile_name('endless-context-225412-f7293e076fe1.json', scope)
+    credentials = ServiceAccountCredentials.from_json_keyfile_name('./credential/endless-context-225412-f7293e076fe1.json', scope)
     gc = gspread.authorize(credentials)
 
     worksheet = gc.open_by_key(SPREADSHEET_KEY).sheet1
