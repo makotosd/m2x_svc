@@ -20,7 +20,7 @@ def update_spreadsheet(temperature, humidity):
     if len(import_value[0]) == 4320:
         import_value[0].pop(0)
 
-    now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    now = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).strftime('%Y-%m-%d %H:%M:%S')
     import_value[0].append([now, temperature, humidity])
     export_value = {'range': 'A2:C4321', 'values': import_value[0]}
 
